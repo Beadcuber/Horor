@@ -25,6 +25,10 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.12'
+      - name: Fix Minecraft 1.21.1 camera enum package
+        working-directory: source/horrormod
+        run: |
+          sed -i 's/import net.minecraft.client.render.CameraSubmersionType;/import net.minecraft.block.enums.CameraSubmersionType;/' src/main/java/com/horrormod/mixin/BackgroundRendererMixin.java
       - name: Build Fabric mod
         working-directory: source/horrormod
         run: gradle build
